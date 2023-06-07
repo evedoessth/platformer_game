@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4gwusj2me4o2"]
+
+[ext_resource type="Texture2D" uid="uid://cirn57k8rot54" path="res://assets/Meow_Knight_idle.png" id="1_cerdf"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cerdf")
