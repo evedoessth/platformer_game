@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://efumhdb0u8q7"
-path="res://.godot/imported/Platform-export.png-fc5310375863647d625b2a99d027f216.ctex"
+uid="uid://bafwmfwvtkte6"
+path="res://.godot/imported/Meow_Knight_idle-Sheet.png-8169f90a8a64ed70b09c106250bc9baf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Platform-export.png"
-dest_files=["res://.godot/imported/Platform-export.png-fc5310375863647d625b2a99d027f216.ctex"]
+source_file="res://assets/Meow_Knight_idle-Sheet.png"
+dest_files=["res://.godot/imported/Meow_Knight_idle-Sheet.png-8169f90a8a64ed70b09c106250bc9baf.ctex"]
 
 [params]
 
