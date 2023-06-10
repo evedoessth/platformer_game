@@ -2,22 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://d4gwusj2me4o2" path="res://player.tscn" id="1_28raq"]
 [ext_resource type="PackedScene" uid="uid://dw5ht1f4tie3a" path="res://platform.tscn" id="2_gpl02"]
-[ext_resource type="Texture2D" uid="uid://dpj3qhesfd7tn" path="res://assets/galaxy_dull.png" id="3_h4ddn"]
+
+[sub_resource type="Curve2D" id="Curve2D_juprk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 240, -46, 0, 0, 0, 0, 240, 786)
+}
+point_count = 2
 
 [node name="GameScreen" type="Node2D"]
+metadata/_edit_vertical_guides_ = [480.0, 240.0]
+metadata/_edit_horizontal_guides_ = [-1.0, 720.0, 0.0]
 
 [node name="Player" parent="." instance=ExtResource("1_28raq")]
-position = Vector2(243, 209)
 
 [node name="Platform" parent="." instance=ExtResource("2_gpl02")]
-position = Vector2(244, 278)
+position = Vector2(0, 35)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_juprk")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(480, 720)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("3_h4ddn")
+[node name="gameTimer" type="Timer" parent="."]
