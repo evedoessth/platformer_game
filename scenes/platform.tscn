@@ -1,18 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw5ht1f4tie3a"]
+[gd_scene load_steps=4 format=3 uid="uid://dw5ht1f4tie3a"]
 
 [ext_resource type="Texture2D" uid="uid://dkusyvvx5one8" path="res://assets/Platform_thin.png" id="1_6ohso"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_77b4e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1adsr"]
 size = Vector2(96, 6)
 
 [node name="Platform" type="StaticBody2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("1_6ohso")
+physics_material_override = SubResource("PhysicsMaterial_77b4e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_1adsr")
-one_way_collision = true
 one_way_collision_margin = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_6ohso")
