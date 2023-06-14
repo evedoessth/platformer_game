@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1w7prv1psp0u"]
+
+[ext_resource type="PackedScene" uid="uid://d4gwusj2me4o2" path="res://scenes/player.tscn" id="1_am6q1"]
+[ext_resource type="Script" path="res://scripts/game_screen.gd" id="1_vbf0a"]
+[ext_resource type="PackedScene" uid="uid://dw5ht1f4tie3a" path="res://scenes/platform.tscn" id="2_8kl7h"]
+[ext_resource type="PackedScene" uid="uid://bhs6m174lvijn" path="res://scenes/hud.tscn" id="4_2fi5v"]
+
+[sub_resource type="Curve2D" id="Curve2D_juprk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 240, -46, 0, 0, 0, 0, 240, 786)
+}
+point_count = 2
+
+[node name="GameScreen" type="Node2D"]
+script = ExtResource("1_vbf0a")
+metadata/_edit_vertical_guides_ = [480.0, 240.0]
+metadata/_edit_horizontal_guides_ = [-1.0, 720.0, 0.0]
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(240, 500)
+
+[node name="Player" parent="." instance=ExtResource("1_am6q1")]
+position = Vector2(0, -1)
+
+[node name="Platform" parent="." instance=ExtResource("2_8kl7h")]
+position = Vector2(52, -11)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_juprk")
+
+[node name="HUD" parent="." instance=ExtResource("4_2fi5v")]
+
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
