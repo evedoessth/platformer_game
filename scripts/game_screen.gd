@@ -1,6 +1,7 @@
 extends Node2D
 
 const restartText = "%1d"
+@export var platform_scene: PackedScene
 
 var score
 
@@ -23,6 +24,7 @@ func _process(delta):
 
 func _on_player_game_over():
 	$ScoreTimer.stop()
+	get_tree().call_group("platforms", "queue_free")
 	
 	$Player.canMove = false
 	$Player.position.x = $StartPosition.position.x
@@ -44,6 +46,7 @@ func new_game():
 	$HUD/ScoreLabel.visible = true
 	
 	$ScoreTimer.start()
+	$PlatformTimer.start()
 	$Player.canMove = true
 	
 
@@ -54,3 +57,17 @@ func _on_score_timer_timeout():
 
 func _on_restart_timer_timeout():
 	new_game()
+
+
+func _on_platform_timer_timeout():
+	var platform = platform_scene.instantiate()
+	
+	var platform_spawn_location = get_node("PlatformPath/PlatformSpawnLocation")
+	platform_spawn_location.progress_ratio = randf()
+	
+	var direction = platform_spawn_location.rotation + PI / 2
+	
+	platform.position = platform_spawn_location.position
+	
+	
+	add_child(platform)
