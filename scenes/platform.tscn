@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dw5ht1f4tie3a"]
+[gd_scene load_steps=12 format=3 uid="uid://dw5ht1f4tie3a"]
 
 [ext_resource type="Texture2D" uid="uid://dkusyvvx5one8" path="res://assets/Platform_thin.png" id="1_6ohso"]
 [ext_resource type="Script" path="res://scenes/platform.gd" id="1_pbcbj"]
@@ -17,7 +17,7 @@ region = Rect2(0, 18, 96, 18)
 [sub_resource type="SpriteFrames" id="SpriteFrames_lg82x"]
 animations = [{
 "frames": [{
-"duration": 5.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_m7rky")
 }, {
 "duration": 1.0,
@@ -25,11 +25,49 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 1.5
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1adsr"]
 size = Vector2(96, 6)
+
+[sub_resource type="Animation" id="Animation_xpsc4"]
+resource_name = "horizontal_movement"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1.3195, 1.18921, 1.27456),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -120), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a124l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8irl"]
+_data = {
+"RESET": SubResource("Animation_a124l"),
+"horizontal_movement": SubResource("Animation_xpsc4")
+}
 
 [node name="Platform" type="StaticBody2D" groups=["platforms"]]
 physics_material_override = SubResource("PhysicsMaterial_77b4e")
@@ -38,6 +76,8 @@ script = ExtResource("1_pbcbj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_lg82x")
+autoplay = "default"
+frame_progress = 0.901285
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -53,5 +93,10 @@ texture = ExtResource("1_6ohso")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-1.90735e-06, 0)
 scale = Vector2(4.8, 0.8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h8irl")
+}
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

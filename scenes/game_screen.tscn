@@ -22,8 +22,7 @@ position = Vector2(240, 500)
 position = Vector2(0, -1)
 camera_path = NodePath("../GameCamera")
 
-[node name="Platform" parent="." instance=ExtResource("2_8kl7h")]
-position = Vector2(3, 3)
+[node name="StarterPlatform" parent="." instance=ExtResource("2_8kl7h")]
 
 [node name="HUD" parent="." instance=ExtResource("4_2fi5v")]
 
@@ -37,11 +36,12 @@ one_shot = true
 motion_mirroring = Vector2(480, 720)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-offset_left = -271.0
-offset_top = -360.0
-offset_right = 745.0
-offset_bottom = 400.0
+offset_left = -290.0
+offset_top = -364.0
+offset_right = 726.0
+offset_bottom = 719.0
 texture = ExtResource("5_kfou5")
+expand_mode = 5
 stretch_mode = 1
 
 [node name="GameCamera" type="Camera2D" parent="."]
