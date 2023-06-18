@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1w7prv1psp0u"]
+[gd_scene load_steps=8 format=3 uid="uid://b1w7prv1psp0u"]
 
 [ext_resource type="PackedScene" uid="uid://d4gwusj2me4o2" path="res://scenes/player.tscn" id="1_am6q1"]
 [ext_resource type="Script" path="res://scripts/game_screen.gd" id="1_vbf0a"]
 [ext_resource type="PackedScene" uid="uid://dw5ht1f4tie3a" path="res://scenes/platform.tscn" id="2_8kl7h"]
 [ext_resource type="PackedScene" uid="uid://bhs6m174lvijn" path="res://scenes/hud.tscn" id="4_2fi5v"]
 [ext_resource type="Texture2D" uid="uid://cs7f8jvp1m6v" path="res://assets/sky.png" id="5_kfou5"]
+[ext_resource type="PackedScene" uid="uid://dprkgkt3gy5ef" path="res://background.tscn" id="5_ttpjk"]
 [ext_resource type="Script" path="res://scenes/GameCamera.gd" id="6_8ox0y"]
 
 [node name="GameScreen" type="Node2D"]
@@ -31,6 +32,8 @@ wait_time = 4.0
 one_shot = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="background" parent="ParallaxBackground" instance=ExtResource("5_ttpjk")]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(480, 720)
