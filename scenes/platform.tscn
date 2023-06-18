@@ -1,14 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://dw5ht1f4tie3a"]
+[gd_scene load_steps=9 format=3 uid="uid://dw5ht1f4tie3a"]
 
 [ext_resource type="Texture2D" uid="uid://dkusyvvx5one8" path="res://assets/Platform_thin.png" id="1_6ohso"]
+[ext_resource type="Script" path="res://scenes/platform.gd" id="1_pbcbj"]
+[ext_resource type="Texture2D" uid="uid://k2458p82yu76" path="res://assets/Platform_thin-export-Sheet.png" id="2_g5g4l"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_77b4e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7rky"]
+atlas = ExtResource("2_g5g4l")
+region = Rect2(0, 0, 96, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmr5y"]
+atlas = ExtResource("2_g5g4l")
+region = Rect2(0, 18, 96, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lg82x"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_m7rky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmr5y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1adsr"]
 size = Vector2(96, 6)
 
 [node name="Platform" type="StaticBody2D" groups=["platforms"]]
 physics_material_override = SubResource("PhysicsMaterial_77b4e")
+script = ExtResource("1_pbcbj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_lg82x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -17,5 +46,12 @@ one_way_collision = true
 one_way_collision_margin = 8.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("1_6ohso")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1.90735e-06, 0)
+scale = Vector2(4.8, 0.8)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

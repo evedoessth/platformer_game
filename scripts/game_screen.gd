@@ -2,21 +2,30 @@ extends Node2D
 
 const restartText = "%1d"
 @export var platform_scene: PackedScene
+var platform = preload("res://scenes/platform.tscn")
 
+var width
 var score
+var platform_spawn
 
 func _ready():
+	width = get_viewport_rect().size.x
 	$Player.canMove = false
-	$Player.position.x = $StartPosition.position.x
-	$Player.position.y = $StartPosition.position.y
-	
-	$Platform.position.x = $StartPosition.position.x #TODO: remove
-	$Platform.position.y = $StartPosition.position.y + 4 #TODO: remove
+	#$Player.position.x = $StartPosition.position.x
+	#$Player.position.y = $StartPosition.position.y
 	
 	$RestartTimer.start()
 	$HUD/RestartLabel.visible = true
 	$HUD/ScoreLabel.visible = false
 	
+	randomize()
+	platform_spawn = 0
+	while platform_spawn > -30000:
+		var new_platform = platform.instantiate()
+		var rand_platform_pos = randi_range(-width/2,width/2)
+		new_platform.set_position(Vector2(rand_platform_pos,platform_spawn))
+		add_child(new_platform)
+		platform_spawn -= randi_range(20,120)
 	
 func _process(delta):
 	$HUD/RestartLabel.text = restartText % $RestartTimer.time_left
@@ -24,7 +33,7 @@ func _process(delta):
 
 func _on_player_game_over():
 	$ScoreTimer.stop()
-	get_tree().call_group("platforms", "queue_free")
+	
 	
 	$Player.canMove = false
 	$Player.position.x = $StartPosition.position.x
@@ -46,7 +55,6 @@ func new_game():
 	$HUD/ScoreLabel.visible = true
 	
 	$ScoreTimer.start()
-	$PlatformTimer.start()
 	$Player.canMove = true
 	
 
@@ -59,15 +67,4 @@ func _on_restart_timer_timeout():
 	new_game()
 
 
-func _on_platform_timer_timeout():
-	var platform = platform_scene.instantiate()
-	
-	var platform_spawn_location = get_node("PlatformPath/PlatformSpawnLocation")
-	platform_spawn_location.progress_ratio = randf()
-	
-	var direction = platform_spawn_location.rotation + PI / 2
-	
-	platform.position = platform_spawn_location.position
-	
-	
-	add_child(platform)
+
