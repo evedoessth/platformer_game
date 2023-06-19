@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dw5ht1f4tie3a"]
 
 [ext_resource type="Texture2D" uid="uid://dkusyvvx5one8" path="res://assets/Platform_thin.png" id="1_6ohso"]
-[ext_resource type="Script" path="res://scenes/platform.gd" id="1_pbcbj"]
+[ext_resource type="Script" path="res://scripts/platform.gd" id="1_nwcle"]
 [ext_resource type="Texture2D" uid="uid://k2458p82yu76" path="res://assets/Platform_thin-export-Sheet.png" id="2_g5g4l"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_77b4e"]
@@ -31,6 +31,21 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1adsr"]
 size = Vector2(96, 6)
 
+[sub_resource type="Animation" id="Animation_a124l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_xpsc4"]
 resource_name = "horizontal_movement"
 length = 4.0
@@ -48,21 +63,6 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, -120), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_a124l"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h8irl"]
 _data = {
 "RESET": SubResource("Animation_a124l"),
@@ -71,7 +71,7 @@ _data = {
 
 [node name="Platform" type="StaticBody2D" groups=["platforms"]]
 physics_material_override = SubResource("PhysicsMaterial_77b4e")
-script = ExtResource("1_pbcbj")
+script = ExtResource("1_nwcle")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -1)
