@@ -1,18 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1w7prv1psp0u"]
+[gd_scene load_steps=7 format=3 uid="uid://b1w7prv1psp0u"]
 
 [ext_resource type="PackedScene" uid="uid://d4gwusj2me4o2" path="res://scenes/player.tscn" id="1_am6q1"]
 [ext_resource type="Script" path="res://scripts/game_screen.gd" id="1_vbf0a"]
 [ext_resource type="PackedScene" uid="uid://dw5ht1f4tie3a" path="res://scenes/platform.tscn" id="2_8kl7h"]
 [ext_resource type="PackedScene" uid="uid://bhs6m174lvijn" path="res://scenes/hud.tscn" id="4_2fi5v"]
-
-[sub_resource type="Curve2D" id="Curve2D_juprk"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 240, -46, 0, 0, 0, 0, 240, 786)
-}
-point_count = 2
+[ext_resource type="Texture2D" uid="uid://cs7f8jvp1m6v" path="res://assets/sky.png" id="5_kfou5"]
+[ext_resource type="Script" path="res://scripts/GameCamera.gd" id="7_s7v67"]
 
 [node name="GameScreen" type="Node2D"]
 script = ExtResource("1_vbf0a")
+platform_scene = ExtResource("2_8kl7h")
 metadata/_edit_vertical_guides_ = [480.0, 240.0]
 metadata/_edit_horizontal_guides_ = [-1.0, 720.0, 0.0]
 
@@ -23,18 +20,33 @@ position = Vector2(240, 500)
 
 [node name="Player" parent="." instance=ExtResource("1_am6q1")]
 position = Vector2(0, -1)
+camera_path = NodePath("../GameCamera")
 
-[node name="Platform" parent="." instance=ExtResource("2_8kl7h")]
-position = Vector2(52, -11)
-
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_juprk")
+[node name="StarterPlatform" parent="." instance=ExtResource("2_8kl7h")]
 
 [node name="HUD" parent="." instance=ExtResource("4_2fi5v")]
 
 [node name="RestartTimer" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(480, 720)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = -290.0
+offset_top = -364.0
+offset_right = 726.0
+offset_bottom = 719.0
+texture = ExtResource("5_kfou5")
+expand_mode = 5
+stretch_mode = 1
+
+[node name="GameCamera" type="Camera2D" parent="."]
+script = ExtResource("7_s7v67")
+player_path = NodePath("../Player")
 
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="game_over" from="Player" to="." method="_on_player_game_over"]

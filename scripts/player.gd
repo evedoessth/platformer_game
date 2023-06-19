@@ -2,12 +2,17 @@ extends CharacterBody2D
 
 signal game_over
 
+@export var camera_path : NodePath
+var camera
+
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -600.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var canMove = false
 
+func _ready():
+	camera = get_node(camera_path)
 
 func _physics_process(delta):
 	if canMove:
@@ -35,12 +40,12 @@ func _physics_process(delta):
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	var resolution = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
-	
-	if position.y > resolution.y:
+
+	if position.y > camera.position.y:
 		game_over.emit()
 	
-	if position.x > resolution.x: 
+	if position.x > camera.position.x: 
 		position.x = 0
 		
 	if position.x < 0:
-		position.x = resolution.x
+		position.x = camera.position.x

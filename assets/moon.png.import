@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpj3qhesfd7tn"
-path="res://.godot/imported/galaxy_dull.png-39dca6e2b8820b2f7b6eea1ccbf561be.ctex"
+uid="uid://722ygkmyq2gu"
+path="res://.godot/imported/moon.png-e4c6172be07b31c7ae536c1ad9030dad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/galaxy_dull.png"
-dest_files=["res://.godot/imported/galaxy_dull.png-39dca6e2b8820b2f7b6eea1ccbf561be.ctex"]
+source_file="res://assets/moon.png"
+dest_files=["res://.godot/imported/moon.png-e4c6172be07b31c7ae536c1ad9030dad.ctex"]
 
 [params]
 
