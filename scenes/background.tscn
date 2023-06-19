@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dprkgkt3gy5ef"]
+
+[ext_resource type="Texture2D" uid="uid://dfboxuy41rbhi" path="res://assets/stars.png" id="1_jh5w7"]
+[ext_resource type="Texture2D" uid="uid://722ygkmyq2gu" path="res://assets/moon.png" id="1_qi3n1"]
+
+[node name="background" type="CanvasLayer"]
+
+[node name="Stars" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(238, 333)
+texture = ExtResource("1_jh5w7")
+
+[node name="Moon" type="Sprite2D" parent="."]
+position = Vector2(362, 90)
+texture = ExtResource("1_qi3n1")
