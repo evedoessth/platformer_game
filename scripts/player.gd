@@ -5,6 +5,9 @@ signal game_over
 @export var camera_path : NodePath
 var camera
 
+
+var width
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
 
@@ -13,6 +16,8 @@ var canMove = false
 
 func _ready():
 	camera = get_node(camera_path)
+
+	width = get_viewport_rect().size.x
 
 func _physics_process(delta):
 	if canMove:
@@ -43,9 +48,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 	if position.y > camera.position.y:
 		game_over.emit()
-	
-	if position.x > camera.position.x: 
-		position.x = 0
+
+	if position.x > camera.position.x and get_velocity().x > 0: 
+		position = Vector2(-width/2-32, position.y)
 		
-	if position.x < 0:
-		position.x = camera.position.x
+	if position.x < 0 and get_velocity().x < 0:
+		position = Vector2(width/2+32, position.y)
+

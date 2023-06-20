@@ -31,7 +31,9 @@ animations = [{
 size = Vector2(96, 6)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qh3q3"]
+
 load_path = "res://.godot/imported/Platform_thin.png-67bcc24de21f5c1f928e6a17198e38e1.ctex"
+
 
 [sub_resource type="Animation" id="Animation_a124l"]
 length = 0.001
