@@ -24,6 +24,9 @@ position = Vector2(240, 500)
 position = Vector2(0, -1)
 camera_path = NodePath("../GameCamera")
 
+[node name="StarterPlatform" parent="." instance=ExtResource("2_8kl7h")]
+
+
 [node name="HUD" parent="." instance=ExtResource("4_2fi5v")]
 
 [node name="RestartTimer" type="Timer" parent="."]

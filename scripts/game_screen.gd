@@ -80,11 +80,11 @@ func spawn_platforms():
 		var rand_platform_pos = randi_range(-width/2,width/2)
 		new_platform.set_position(Vector2(rand_platform_pos,platform_spawn))
 		
+
 		# Diese Funktion will nicht und wir haben nicht herausgefunden warum sie nur die erste Platfrom animiert
 		randomize()
 		var randmove = randi_range(0,6)
 		if (randmove == 5):
-			
 			new_platform.get_node("AnimationPlayer").play("horizontal_movement")
 		
 		add_child(new_platform)
