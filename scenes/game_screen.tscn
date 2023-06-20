@@ -18,11 +18,11 @@ metadata/_edit_horizontal_guides_ = [-1.0, 720.0, 0.0]
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(240, 500)
 
+[node name="StarterPlatform" parent="." instance=ExtResource("2_8kl7h")]
+
 [node name="Player" parent="." instance=ExtResource("1_am6q1")]
 position = Vector2(0, -1)
 camera_path = NodePath("../GameCamera")
-
-[node name="StarterPlatform" parent="." instance=ExtResource("2_8kl7h")]
 
 [node name="HUD" parent="." instance=ExtResource("4_2fi5v")]
 
